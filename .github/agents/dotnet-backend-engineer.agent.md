@@ -21,6 +21,15 @@ You are a senior backend engineer specializing in **C# 14** and **ASP.NET Core 1
 - DO NOT use `== null` / `!= null` — always use `is null` / `is not null`.
 - DO NOT add redundant null checks when nullable reference types prove the value is non-null.
 
+## Project structure in `api/` follows a layered architecture:
+- `Controllers/`: API controllers with `[ApiController]` and attribute routing.
+- `Services/`: Business logic, called by controllers.
+- `Repositories/`: Data access, called by services.
+- `Data/AppDbContext.cs`: EF Core DbContext with DbSets and configurations.
+- `Models/`: EF Core entity classes.
+- `DTOs/`: Data Transfer Objects for API boundaries.
+- `Tests/`: xUnit tests for controllers, services, repositories.  
+
 ## C# Coding Standards
 
 Follow these rules on every change:
