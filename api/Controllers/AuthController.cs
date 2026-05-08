@@ -1,6 +1,7 @@
 using api.DTOs;
 using api.Services;
 using FluentValidation;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers;
@@ -22,6 +23,7 @@ public class AuthController : ControllerBase
     /// Authenticates a user with email and password and returns a JWT token.
     /// </summary>
     [HttpPost("login")]
+    [EnableCors("AllowLogin")]
     [ProducesResponseType(typeof(LoginResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(LoginResponse), StatusCodes.Status401Unauthorized)]

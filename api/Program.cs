@@ -50,6 +50,15 @@ builder.Services.AddControllers();
 builder.Services.AddProblemDetails();
 builder.Services.AddOpenApi();
 
+// CORS: allow any origin/header/method for the login endpoint.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLogin", policy =>
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .WithMethods("POST", "OPTIONS"));
+});
+
 var app = builder.Build();
 
 // Ensure database exists; seed a demo user in Development.
@@ -75,6 +84,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

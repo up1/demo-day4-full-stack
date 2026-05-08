@@ -13,7 +13,7 @@ export interface LoginResponse {
   token: string;
 }
 
-const API_HOST = 'http://localhost:8080';
+const API_HOST = 'http://localhost:5081';
 const REQUEST_TIMEOUT_MS = 5000;
 const RETRY_COUNT = 2;
 const RETRY_DELAY_MS = 1000;
