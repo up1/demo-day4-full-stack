@@ -18,7 +18,18 @@
         <h1 class="font-h1 text-h1 font-semibold text-primary mb-xs">Welcome back</h1>
         <p class="font-body-md text-body-md text-secondary">Enter your credentials to access your portal</p>
       </div>
-      <form class="space-y-lg" (submit)="onSubmit($event)">
+
+      @if (serverError(); as error) {
+        <div
+          class="mb-lg rounded border border-error bg-error-container px-md py-sm text-on-error-container font-body-sm text-body-sm"
+          role="alert"
+          aria-live="assertive"
+        >
+          {{ error }}
+        </div>
+      }
+
+      <form class="space-y-lg" [formGroup]="form" (ngSubmit)="onSubmit($event)" novalidate>
         <div class="space-y-sm">
           <label class="font-label-caps text-label-caps text-on-surface-variant block" for="email">EMAIL ADDRESS</label>
           <input
@@ -26,7 +37,16 @@
             id="email"
             placeholder="name@company.com"
             type="email"
+            autocomplete="email"
+            formControlName="email"
+            [attr.aria-invalid]="!!emailErrorMessage()"
+            [attr.aria-describedby]="emailErrorMessage() ? 'email-error' : null"
           />
+          @if (emailErrorMessage(); as message) {
+            <p id="email-error" class="font-body-sm text-body-sm text-error" role="alert">
+              {{ message }}
+            </p>
+          }
         </div>
         <div class="space-y-sm">
           <div class="flex justify-between items-center">
@@ -38,16 +58,35 @@
               class="w-full bg-surface-container-lowest border border-surface-container-high px-md py-md rounded font-body-md text-body-md focus:outline-none focus:border-primary placeholder:text-outline-variant transition-colors"
               id="password"
               placeholder="••••••••"
+              autocomplete="current-password"
+              formControlName="password"
               [type]="showPassword() ? 'text' : 'password'"
+              [attr.aria-invalid]="!!passwordErrorMessage()"
+              [attr.aria-describedby]="passwordErrorMessage() ? 'password-error' : null"
             />
-            <button class="absolute right-md top-1/2 -translate-y-1/2 text-secondary hover:text-primary" type="button" (click)="togglePassword()">
-              <span class="material-symbols-outlined text-[20px]">{{ showPassword() ? 'visibility_off' : 'visibility' }}</span>
+            <button
+              class="absolute right-md top-1/2 -translate-y-1/2 text-secondary hover:text-primary"
+              type="button"
+              (click)="togglePassword()"
+              [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
+              [attr.aria-pressed]="showPassword()"
+            >
+              <span class="material-symbols-outlined text-[20px]" aria-hidden="true">{{ showPassword() ? 'visibility_off' : 'visibility' }}</span>
             </button>
           </div>
+          @if (passwordErrorMessage(); as message) {
+            <p id="password-error" class="font-body-sm text-body-sm text-error" role="alert">
+              {{ message }}
+            </p>
+          }
         </div>
         <div class="pt-sm">
-          <button class="w-full bg-primary text-on-primary font-body-md text-body-md font-semibold py-md rounded hover:opacity-90 transition-all" type="submit">
-            Sign In
+          <button
+            class="w-full bg-primary text-on-primary font-body-md text-body-md font-semibold py-md rounded hover:opacity-90 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+            type="submit"
+            [disabled]="isSubmitting()"
+          >
+            {{ isSubmitting() ? 'Signing in…' : 'Sign In' }}
           </button>
         </div>
         <div class="relative py-md">
