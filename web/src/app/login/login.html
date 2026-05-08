@@ -1,0 +1,98 @@
+<!-- TopAppBar -->
+<header class="bg-surface-container-lowest border-b border-surface-container w-full sticky top-0 z-50">
+  <div class="flex justify-between items-center w-full px-lg py-md max-w-[1280px] mx-auto">
+    <div class="font-h2 text-h2 font-bold tracking-tighter text-primary">ARCHETYPE</div>
+    <nav class="hidden md:flex items-center gap-[48px]">
+      <a class="font-body-md text-body-md text-secondary hover:text-primary transition-colors duration-200" href="#">Support</a>
+      <a class="font-body-md text-body-md text-secondary hover:text-primary transition-colors duration-200" href="#">Help Center</a>
+      <button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-body-sm text-body-sm hover:opacity-90 transition-all">Contact Sales</button>
+    </nav>
+  </div>
+</header>
+
+<main class="flex-grow flex items-center justify-center px-lg py-[80px]">
+  <!-- Login Canvas -->
+  <div class="w-full max-w-[440px]">
+    <div class="bg-surface-container-lowest border border-surface-container p-[48px] rounded-lg">
+      <div class="mb-[48px] text-center">
+        <h1 class="font-h1 text-h1 font-semibold text-primary mb-xs">Welcome back</h1>
+        <p class="font-body-md text-body-md text-secondary">Enter your credentials to access your portal</p>
+      </div>
+      <form class="space-y-lg" (submit)="onSubmit($event)">
+        <div class="space-y-sm">
+          <label class="font-label-caps text-label-caps text-on-surface-variant block" for="email">EMAIL ADDRESS</label>
+          <input
+            class="w-full bg-surface-container-lowest border border-surface-container-high px-md py-md rounded font-body-md text-body-md focus:outline-none focus:border-primary placeholder:text-outline-variant transition-colors"
+            id="email"
+            placeholder="name@company.com"
+            type="email"
+          />
+        </div>
+        <div class="space-y-sm">
+          <div class="flex justify-between items-center">
+            <label class="font-label-caps text-label-caps text-on-surface-variant block" for="password">PASSWORD</label>
+            <a class="font-body-sm text-body-sm text-primary hover:underline" href="#">Forgot password?</a>
+          </div>
+          <div class="relative">
+            <input
+              class="w-full bg-surface-container-lowest border border-surface-container-high px-md py-md rounded font-body-md text-body-md focus:outline-none focus:border-primary placeholder:text-outline-variant transition-colors"
+              id="password"
+              placeholder="••••••••"
+              [type]="showPassword() ? 'text' : 'password'"
+            />
+            <button class="absolute right-md top-1/2 -translate-y-1/2 text-secondary hover:text-primary" type="button" (click)="togglePassword()">
+              <span class="material-symbols-outlined text-[20px]">{{ showPassword() ? 'visibility_off' : 'visibility' }}</span>
+            </button>
+          </div>
+        </div>
+        <div class="pt-sm">
+          <button class="w-full bg-primary text-on-primary font-body-md text-body-md font-semibold py-md rounded hover:opacity-90 transition-all" type="submit">
+            Sign In
+          </button>
+        </div>
+        <div class="relative py-md">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-surface-container-high"></div>
+          </div>
+          <div class="relative flex justify-center text-label-caps">
+            <span class="bg-surface-container-lowest px-md text-outline">OR CONTINUE WITH</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-md">
+          <button class="flex items-center justify-center gap-sm border border-surface-container-high py-sm rounded hover:bg-surface-container-low transition-colors" type="button">
+            <span class="material-symbols-outlined text-[18px]">account_balance</span>
+            <span class="font-body-sm text-body-sm">Enterprise</span>
+          </button>
+          <button class="flex items-center justify-center gap-sm border border-surface-container-high py-sm rounded hover:bg-surface-container-low transition-colors" type="button">
+            <span class="material-symbols-outlined text-[18px]">key</span>
+            <span class="font-body-sm text-body-sm">SSO</span>
+          </button>
+        </div>
+      </form>
+      <div class="mt-[48px] text-center">
+        <p class="font-body-sm text-body-sm text-secondary">
+          Don't have an account?
+          <a class="text-primary font-semibold hover:underline" href="#">Create an account</a>
+        </p>
+      </div>
+    </div>
+    <!-- Security Badge -->
+    <div class="mt-lg flex items-center justify-center gap-sm text-outline opacity-60">
+      <span class="material-symbols-outlined text-[16px]">verified_user</span>
+      <span class="font-label-caps text-label-caps uppercase">SECURE AES-256 ENCRYPTION</span>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-surface-container w-full">
+  <div class="flex flex-col md:flex-row justify-between items-center w-full px-lg py-[48px] max-w-[1280px] mx-auto gap-md">
+    <div class="font-label-caps text-label-caps font-bold text-primary">ARCHETYPE</div>
+    <div class="flex gap-lg">
+      <a class="font-body-sm text-body-sm text-on-secondary-container hover:text-primary transition-colors" href="#">Privacy Policy</a>
+      <a class="font-body-sm text-body-sm text-on-secondary-container hover:text-primary transition-colors" href="#">Terms of Service</a>
+      <a class="font-body-sm text-body-sm text-on-secondary-container hover:text-primary transition-colors" href="#">Security</a>
+    </div>
+    <div class="font-body-sm text-body-sm text-secondary">© 2024 Archetype Systems. All rights reserved.</div>
+  </div>
+</footer>
