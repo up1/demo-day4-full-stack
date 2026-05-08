@@ -29,6 +29,8 @@
 - Call API with HttpClient module in Angular to handle the login request.
   * timeout: 5000ms
   * retry: 2 times with a delay of 1000ms between retries
+  
+- **HOST**: http://localhost:8080
 - **Endpoint**: POST /api/login
 - **Request Body**:
 ```json
