@@ -1,0 +1,153 @@
+<main class="min-h-screen flex flex-col items-center justify-center p-lg">
+  <div class="mb-xl text-center">
+    <h1 class="font-h1 text-h1 tracking-tighter text-primary">ARCHETYPE</h1>
+    <p class="font-body-sm text-body-sm text-secondary mt-sm">
+      Precision Engineering for Enterprise Systems
+    </p>
+  </div>
+
+  <div class="w-full max-w-[440px] bg-surface-container-lowest border border-surface-container p-xl rounded-lg">
+    <header class="mb-xl">
+      <h2 class="font-h2 text-h2 text-primary">Create Account</h2>
+      <p class="font-body-sm text-body-sm text-secondary mt-xs">
+        Enter your details to register for the platform.
+      </p>
+    </header>
+
+    @if (serverError(); as error) {
+      <div
+        class="mb-lg rounded border border-error bg-error-container px-md py-sm text-on-error-container font-body-sm text-body-sm"
+        role="alert"
+        aria-live="assertive"
+      >
+        {{ error }}
+      </div>
+    }
+
+    <form class="space-y-lg" [formGroup]="form" (ngSubmit)="onSubmit($event)" novalidate>
+      <div>
+        <label class="block font-label-caps text-label-caps text-on-surface-variant mb-sm uppercase" for="name">Full Name</label>
+        <input
+          class="w-full h-11 px-md bg-surface-container-lowest border border-surface-container-high rounded font-body-md text-body-md form-focus-ring focus:outline-none focus:border-primary placeholder:text-outline"
+          id="name"
+          type="text"
+          autocomplete="name"
+          placeholder="John Doe"
+          formControlName="name"
+          [attr.aria-invalid]="!!nameErrorMessage()"
+          [attr.aria-describedby]="nameErrorMessage() ? 'name-error' : null"
+        />
+        @if (nameErrorMessage(); as message) {
+          <p id="name-error" class="mt-xs font-body-sm text-body-sm text-error" role="alert">
+            {{ message }}
+          </p>
+        }
+      </div>
+
+      <div>
+        <label class="block font-label-caps text-label-caps text-on-surface-variant mb-sm uppercase" for="email">Work Email</label>
+        <input
+          class="w-full h-11 px-md bg-surface-container-lowest border border-surface-container-high rounded font-body-md text-body-md form-focus-ring focus:outline-none focus:border-primary placeholder:text-outline"
+          id="email"
+          type="email"
+          autocomplete="email"
+          placeholder="name@company.com"
+          formControlName="email"
+          [attr.aria-invalid]="!!emailErrorMessage()"
+          [attr.aria-describedby]="emailErrorMessage() ? 'email-error' : null"
+        />
+        @if (emailErrorMessage(); as message) {
+          <p id="email-error" class="mt-xs font-body-sm text-body-sm text-error" role="alert">
+            {{ message }}
+          </p>
+        }
+      </div>
+
+      <div class="grid grid-cols-1 gap-lg">
+        <div>
+          <label class="block font-label-caps text-label-caps text-on-surface-variant mb-sm uppercase" for="password">Password</label>
+          <input
+            class="w-full h-11 px-md bg-surface-container-lowest border border-surface-container-high rounded font-body-md text-body-md form-focus-ring focus:outline-none focus:border-primary placeholder:text-outline"
+            id="password"
+            type="password"
+            autocomplete="new-password"
+            placeholder="••••••••"
+            formControlName="password"
+            [attr.aria-invalid]="!!passwordErrorMessage()"
+            [attr.aria-describedby]="passwordErrorMessage() ? 'password-error' : null"
+          />
+          @if (passwordErrorMessage(); as message) {
+            <p id="password-error" class="mt-xs font-body-sm text-body-sm text-error" role="alert">
+              {{ message }}
+            </p>
+          }
+        </div>
+
+        <div>
+          <label class="block font-label-caps text-label-caps text-on-surface-variant mb-sm uppercase" for="confirm-password">Confirm Password</label>
+          <input
+            class="w-full h-11 px-md bg-surface-container-lowest border border-surface-container-high rounded font-body-md text-body-md form-focus-ring focus:outline-none focus:border-primary placeholder:text-outline"
+            id="confirm-password"
+            type="password"
+            autocomplete="new-password"
+            placeholder="••••••••"
+            formControlName="confirmPassword"
+            [attr.aria-invalid]="!!confirmPasswordErrorMessage()"
+            [attr.aria-describedby]="confirmPasswordErrorMessage() ? 'confirm-password-error' : null"
+          />
+          @if (confirmPasswordErrorMessage(); as message) {
+            <p id="confirm-password-error" class="mt-xs font-body-sm text-body-sm text-error" role="alert">
+              {{ message }}
+            </p>
+          }
+        </div>
+      </div>
+
+      <div class="flex items-start gap-sm">
+        <input
+          class="mt-1 w-4 h-4 border border-outline rounded-xs text-primary focus:ring-0"
+          id="terms"
+          type="checkbox"
+          formControlName="terms"
+          [attr.aria-invalid]="!!termsErrorMessage()"
+          [attr.aria-describedby]="termsErrorMessage() ? 'terms-error' : null"
+        />
+        <label class="font-body-sm text-body-sm text-secondary" for="terms">
+          I agree to the
+          <a class="text-primary font-medium hover:underline" href="#">Terms of Service</a>
+          and
+          <a class="text-primary font-medium hover:underline" href="#">Privacy Policy</a>.
+        </label>
+      </div>
+      @if (termsErrorMessage(); as message) {
+        <p id="terms-error" class="-mt-md font-body-sm text-body-sm text-error" role="alert">
+          {{ message }}
+        </p>
+      }
+
+      <div class="pt-md">
+        <button
+          class="w-full h-12 bg-primary text-on-primary font-body-md text-body-md font-semibold rounded hover:bg-opacity-90 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+          type="submit"
+          [disabled]="isSubmitting()"
+        >
+          {{ isSubmitting() ? 'Creating account…' : 'Create Account' }}
+        </button>
+      </div>
+    </form>
+
+    <footer class="mt-xl pt-lg border-t border-surface-container flex justify-center">
+      <p class="font-body-sm text-body-sm text-secondary">
+        Already have an account?
+        <a class="text-primary font-semibold hover:underline" routerLink="/login">Log in</a>
+      </p>
+    </footer>
+  </div>
+
+  <div class="mt-xl flex items-center gap-sm text-on-tertiary-container opacity-60">
+    <span class="material-symbols-outlined text-[18px]" aria-hidden="true">verified_user</span>
+    <span class="font-label-caps text-label-caps uppercase tracking-widest">
+      Enterprise-Grade Encryption Active
+    </span>
+  </div>
+</main>
