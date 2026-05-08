@@ -1,0 +1,171 @@
+<main class="dashboard" aria-label="Monitoring Dashboard">
+  <section class="top-section">
+    <header class="header-bar">
+      <div class="logo-area">
+        <span class="logo-icon" aria-hidden="true"></span>
+        <span class="logo-text">System Monitor</span>
+      </div>
+
+      <nav class="nav-tabs" aria-label="Dashboard sections">
+        @for (tab of tabs; track tab) {
+          <button
+            type="button"
+            class="tab"
+            [class.is-active]="activeTab() === tab"
+            [attr.aria-current]="activeTab() === tab ? 'page' : null"
+            (click)="setTab(tab)"
+          >
+            {{ tab }}
+          </button>
+        }
+      </nav>
+
+      <div class="spacer"></div>
+
+      <div class="right-section">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span class="status-text">All Systems Operational</span>
+        <span class="avatar" role="img" aria-label="User avatar"></span>
+      </div>
+    </header>
+
+    <div class="kpi-row">
+      @for (kpi of kpis; track kpi.label) {
+        <article class="card">
+          <div class="card-top">
+            <span class="card-icon" aria-hidden="true">{{ kpi.icon }}</span>
+            <span class="card-label">{{ kpi.label }}</span>
+          </div>
+          <div class="card-value">{{ kpi.value }}</div>
+          <div class="card-trend" [class]="'trend-' + kpi.trendTone">{{ kpi.trend }}</div>
+        </article>
+      }
+    </div>
+
+    <div class="charts-row">
+      <article class="panel">
+        <div class="panel-header">
+          <h3 class="panel-title">Server Response Time</h3>
+          <span class="panel-subtitle">Last 7 days</span>
+        </div>
+        <div class="bar-chart" role="img" aria-label="Bar chart of server response time over the last 7 days">
+          @for (bar of bars; track bar.day) {
+            <div class="bar-col">
+              <div
+                class="bar-fill"
+                [style.height]="barHeight(bar.value)"
+                [attr.aria-label]="bar.day + ': ' + bar.value"
+              ></div>
+              <span class="bar-label">{{ bar.day }}</span>
+            </div>
+          }
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header">
+          <h3 class="panel-title">Resource Allocation</h3>
+          <span class="panel-subtitle">Current</span>
+        </div>
+        <div class="donut-body">
+          <div class="donut" role="img" aria-label="Resource allocation donut chart">
+            <div class="donut-center">
+              <div class="donut-center-value">100%</div>
+              <div class="donut-center-label">Total</div>
+            </div>
+          </div>
+          <ul class="legend">
+            @for (item of legend; track item.label) {
+              <li class="legend-item">
+                <span class="legend-swatch" [style.background]="item.color" aria-hidden="true"></span>
+                <span class="legend-label">{{ item.label }}</span>
+                <span class="legend-value">{{ item.value }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="bottom-section">
+    <div class="section-title">
+      <h2>Recent Alerts</h2>
+      <button type="button" class="view-all-btn">View All</button>
+    </div>
+
+    <div class="alerts-table">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Alert</th>
+            <th scope="col">Severity</th>
+            <th scope="col">Source</th>
+            <th scope="col">Time</th>
+            <th scope="col" class="col-status">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (alert of alerts; track alert.title) {
+            <tr>
+              <td>
+                <div class="alert-title">
+                  <span class="alert-dot" [style.background]="alert.dotColor" aria-hidden="true"></span>
+                  {{ alert.title }}
+                </div>
+              </td>
+              <td>
+                <span class="badge" [class]="'badge-' + alert.severity">
+                  {{ severityLabel(alert.severity) }}
+                </span>
+              </td>
+              <td>{{ alert.source }}</td>
+              <td>{{ alert.time }}</td>
+              <td class="status-cell">
+                <span class="badge" [class]="'badge-' + alert.status">
+                  {{ statusLabel(alert.status) }}
+                </span>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-title">
+      <h2>System Status</h2>
+      <span class="last-updated">Last updated: 30s ago</span>
+    </div>
+
+    <div class="status-grid">
+      @for (item of statusCards; track item.title) {
+        <article class="status-card">
+          <div class="status-card-header">
+            <span class="status-card-title">{{ item.title }}</span>
+            <span class="status-pill" [class]="'pill-' + item.statusTone">
+              {{ item.statusLabel }}
+            </span>
+          </div>
+          <div
+            class="progress"
+            role="progressbar"
+            [attr.aria-valuenow]="item.percent"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            [attr.aria-label]="item.title + ' health'"
+          >
+            <div
+              class="progress-fill"
+              [style.width]="statusBarWidth(item.percent)"
+              [style.background]="statusBarColor(item.statusTone)"
+            ></div>
+          </div>
+          <div class="status-meta">
+            <span class="meta-label">{{ item.metaLabel }}</span>
+            <span class="meta-value">{{ item.metaValue }}</span>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+</main>

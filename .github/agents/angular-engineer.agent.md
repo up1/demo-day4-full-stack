@@ -1,6 +1,6 @@
 ---
 description: "Angular frontend engineer. Use when building Angular components, services, templates, routing, forms, signals, state management, or working with Angular v20+ features. Specializes in TypeScript, standalone components, reactive patterns, and accessibility."
-tools: [read, edit, search, execute, web]
+tools: [execute/getTerminalOutput, execute/killTerminal, execute/sendToTerminal, execute/createAndRunTask, execute/runInTerminal, execute/runNotebookCell, execute/runTests, read/terminalSelection, read/terminalLastCommand, read/getNotebookSummary, read/problems, read/readFile, read/viewImage, read/readNotebookCellOutput, pencil/batch_design, pencil/batch_get, pencil/export_nodes, pencil/find_empty_space_on_canvas, pencil/get_editor_state, pencil/get_guidelines, pencil/get_screenshot, pencil/get_variables, pencil/open_document, pencil/replace_all_matching_properties, pencil/search_all_unique_properties, pencil/set_variables, pencil/snapshot_layout, edit/createDirectory, edit/createFile, edit/createJupyterNotebook, edit/editFiles, edit/editNotebook, edit/rename, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/usages, web/fetch, web/githubRepo, web/githubTextSearch]
 name: Frontend Angular Engineer
 ---
 
