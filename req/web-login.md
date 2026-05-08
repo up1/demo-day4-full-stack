@@ -30,26 +30,5 @@
   * timeout: 5000ms
   * retry: 2 times with a delay of 1000ms between retries
   
-- **HOST**: http://localhost:8080
 - **Endpoint**: POST /api/login
-- **Request Body**:
-```json
-{
-  "email": "user@example.com",
-  "password": "password123"
-}
-```
-- **Response**:
-  - **Success**:
-  ```json
-  {
-    "message": "Login successful",
-    "token": "jwt_token_here"
-  }
-  ```
-  - **Failure**:
-  ```json
-  { 
-    "message": "Invalid email or password" 
-  }
-  ```
+* use spec from `req/api-login.md` for API request and response details.
