@@ -47,3 +47,15 @@
 | TC002 | Invalid email format | 1. Send a POST request with an invalid email format (e.g., "userexample.com"). | API responds with an error message "Please enter a valid email address." |
 | TC003 | Short password | 1. Send a POST request with a valid email and a password shorter than 8 characters (e.g., "pass"). | API responds with an error message "Password must be at least 8 characters." |
 | TC004 | Incorrect credentials | 1. Send a POST request with a valid email and an incorrect password. | API responds with an error message "Invalid email or password". |  
+
+
+## 5. Database Schema
+- **Users Table**:
+| Column Name | Data Type | Constraints |
+|-------------|-----------|-------------|
+| Id          | INTEGER   | PRIMARY KEY, AUTOINCREMENT |
+| Email       | TEXT      | NOT NULL, UNIQUE |
+| PasswordHash | TEXT      | NOT NULL | 
+| CreatedAt   | DATETIME  | NOT NULL, DEFAULT CURRENT_TIMESTAMP |
+| UpdatedAt   | DATETIME  | NOT NULL, DEFAULT CURRENT_TIMESTAMP |
+
